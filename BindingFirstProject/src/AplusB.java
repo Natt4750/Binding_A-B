@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.beans.binding.StringBinding;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -32,7 +33,7 @@ public class AplusB extends Application
 	  Label lblResult = new Label();
 		lblResult.setLayoutX(100);
 		lblResult.setLayoutY(100);
-
+		
 			
 		
 		
@@ -61,24 +62,31 @@ public class AplusB extends Application
 		txtB.setLayoutX(20);
 		txtB.setLayoutY(80);
 		
-		
 		txtB.textProperty().addListener((observable,oldValue,newValue) ->
 		{
 			lblB.setText(txtB.getText());
-	
+			 
+		}
 			
-		}
-		
 				);
 		
-		lblResult.textProperty().addListener((observable,oldValue,newValue) ->
-		{
-			lblResult.setText(Integer.parseInt(lblA.getText()) + lblA.getText());
-		}
+		  
+		  
+				
+				  lblResult.textProperty().bind(new StringBinding() { {
+				  super.bind(txtA.textProperty()); super.bind(txtB.textProperty()); }
+				  
+				  @Override public String computeValue() { return
+				  String.valueOf(Integer.parseInt(txtB.getText())+Integer.parseInt(txtA.getText
+				  ())); } });
+				 
+		 
+		
+	
+				
+		
 				
 				
-				
-				);
 		
 		
 		
